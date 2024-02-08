@@ -18,14 +18,19 @@ app.MapPost("/saveproduct", (Product product) => {
     return product.Code + " - " + product.Name;
 });
 
-//Através de parametros
+//parametros Query string
 app.MapGet("/getproduct", ([FromQuery] string dateStart, [FromQuery] string dateEnd) => {
     return dateStart + " - " + dateEnd;
 });
 
-//Através de rotas
+//parametros rotas
 app.MapGet("/getproduct/{code}", ([FromRoute] string code) => {
     return code;
+});
+
+//parametros Header
+app.MapGet("/getproductheader", (HttpRequest request) => {
+    return request.Headers["product-code"].ToString();
 });
 
 app.Run();
