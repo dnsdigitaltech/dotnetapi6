@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World 2!");
+app.MapGet("/", () => "Hello World!");
 
 app.MapPost("/products", (Product product) => {
     ProductRepository.Add(product);
@@ -13,8 +13,10 @@ app.MapPost("/products", (Product product) => {
 //parametros rotas
 app.MapGet("/products/{code}", ([FromRoute] string code) => {
     var product = ProductRepository.GetBy(code);
-    if(product != null)
+    if(product != null){
+        Console.WriteLine("Product Found");
         return Results.Ok(product);
+    }
     return Results.NotFound();
 });
 
@@ -31,6 +33,7 @@ app.MapDelete("/products/{code}", ([FromRoute] string code) => {
 });
 
 app.Run();
+
 
 public static class ProductRepository {
     public static List<Product> Products { get; set; }
