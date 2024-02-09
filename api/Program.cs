@@ -66,3 +66,5 @@ public class Product {
     public string Code { get; set; }
     public string Name { get; set; }
 }
+
+//https://learn.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&pivots=cs1-bash
