@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
@@ -66,5 +67,15 @@ public class Product {
     public string Code { get; set; }
     public string Name { get; set; }
 }
+
+public class ApplicationDbContext : DbContext {
+    public DbSet<Product> Products { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlServer(
+            "Server=localhost;Database=Products;Uder Id=sa;Password=@Sql2024;MultipleActiveResultSets=true;Encrypt=YES;TrustServerCerfificate=YES"
+            );
+}
+
 
 //https://learn.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&pivots=cs1-bash
